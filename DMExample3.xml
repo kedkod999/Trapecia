@@ -1,0 +1,53 @@
+<!--
+Goal of this extension: To use external defined modules and create octagon shape body using extrude, revolve and unite commands...
+
+Main contents:
+    1. One XML file with one ACT object to create tree object.
+    2. One Python file collecting the user inputs and printing it to extension log file.
+
+Documentation References:
+    1. XML Tags > geomtery, XML Tags > extension, XML Tags > script, XML Tags > interface, XML Tags > toolbar & XML Tags > entry in HTML Reference's guide
+	2. XML Tags > simdata, XML Tags > geometry, XML Tags > propertygroup & XML Tags > property in HTML Reference's guide
+	3. API's Discription > IDesignMOdelerDataModel > GeometryBuilder in HTML Reference's guide
+
+Usage instructions:
+    1. Copy this XML and the folder (DMExample3) to %appdata%\Ansys\v145\AdvancedAddinPackage\extension.
+    2. Open the Workbench R15.
+    3. Turn on the Beta options under Tools >> Options >> Appearance
+	4. Load the extension
+    5. Open DesignModeler and use the extension.
+-->
+
+<extension version="1" name="DMExample3">
+	
+	<guid shortid="DMExample3">7e94a44c-4a43-40e1-ba67-b1ce8100778e</guid>
+	
+	<script src="DMExample3.py" />
+	
+	<interface context="DesignModeler">
+		<images>images</images>
+		
+		<toolbar name="DMExample3" caption="DMExample3">
+			<entry name="Create Octagon"  icon="box3">
+				<callbacks>
+					<onclick>createMyFeature</onclick>
+				</callbacks>
+			</entry>
+		</toolbar>
+	</interface>
+
+	<simdata context="DesignModeler">
+		<geometry name="OctaFeature" caption="OctaFeature" icon="box3" version="1">
+			<callbacks>
+				<ongenerate>generateOctagonGeom</ongenerate>
+			</callbacks>
+			<property name="Niz" caption="Niz" unit="Length" control="float" default="1 [m]"></property>
+			<property name="Ver" caption="Ver" unit="Length" control="float" default="0.5 [m]"></property>
+			<property name="Sdvid" caption="Sdvid" unit="Length" control="float" default="0.25 [m]"></property>
+			<property name="H" caption="H" unit="Length" control="float" default="0.5 [m]"></property>
+			<property name="Width" caption="Width" unit="Length" control="float" default="0.5 [m]"></property>
+			<property name="Radius" caption="Radius" unit="Length" control="float" default="0.05 [m]"></property>
+		</geometry>
+	</simdata>
+
+</extension>
